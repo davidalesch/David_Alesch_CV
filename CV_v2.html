@@ -1,387 +1,371 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2299">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Alesch - Interactive CV</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --background: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-links a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--background);
+        }
+
+        .card-header i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--background);
+        }
+
+        .experience-item:last-child, .education-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .experience-item h3, .education-item h3 {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .date {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background: var(--background);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .language-bar {
+            margin-bottom: 1.5rem;
+        }
+
+        .language-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--background);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header {
+                padding: 2rem 1rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;David Alesch - Interactive CV&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap');</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>:root {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--primary: #2563eb;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--primary-light: #3b82f6;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--background: #f8fafc;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--card: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--text: #1e293b;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--text-light: #64748b;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>* {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Inter', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: var(--background);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.6;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.container {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-width: 1200px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.header {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 4rem 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.header h1 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 3rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.contact-links {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.contact-links a {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-decoration: none;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 0.5rem 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.1);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.contact-links a:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.2);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.grid {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.card {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: var(--card);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.card:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-5px);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.card-header {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding-bottom: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 2px solid var(--background);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.card-header i {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--primary);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.card-header h2 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.experience-item, .education-item {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding-bottom: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid var(--background);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.experience-item:last-child, .education-item:last-child {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: none;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding-bottom: 0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.experience-item h3, .education-item h3 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--primary);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.date {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.875rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-light);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.skills-grid {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.skill-item {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: var(--background);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.skill-item:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: var(--primary);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.language-bar {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.language-header {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.progress-bar {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: var(--background);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.progress {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: width 1s ease;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.projects {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.project-card {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: var(--background);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.project-card:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: var(--primary);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 768px) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.container {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>padding: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>.header {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>padding: 2rem 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>.contact-links {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>gap: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>.grid {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>grid-template-columns: 1fr;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;header class="header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1&gt;David Josef Alesch&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Financial Technology &amp; Mechanical Engineering Professional&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="contact-links"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="tel:+352661325372"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-phone"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>+352 661 325372</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="mailto:david.alesch@me.com"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-envelope"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>david.alesch@me.com</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="https://www.linkedin.com/in/david-alesch" target="_blank"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fab fa-linkedin"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>LinkedIn</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="card-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-briefcase"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2&gt;Experience&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="experience-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Mercedes-Benz AG&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="date"&gt;11/2023 – 05/2024&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;Strategic Project Management Intern&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;Strategic decision-making committee preparation&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;Cross-departmental coordination&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;Project tracking optimization&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="experience-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Innoscripta AG&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="date"&gt;11/2022 – 06/2023&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;Technical Project Manager&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;SME consulting for R&amp;D funding&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;Technical proposal development&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;Cross-department coordination&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="card-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-graduation-cap"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2&gt;Education&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="education-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;University College London&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="date"&gt;2024 – 2025&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;MSc in Financial Technology&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;Expected grade: 71% (Distinction)&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="education-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;ETH Zurich&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="date"&gt;2019 – 2022&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;BSc in Mechanical Engineering&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;Grade: 5.17/6 (GPA: 3.3)&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="card-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-code"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2&gt;Technical Skills&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="skills-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="skill-item"&gt;Rust&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="skill-item"&gt;Python&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="skill-item"&gt;Solidity&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="skill-item"&gt;DAML&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="skill-item"&gt;MATLAB&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="skill-item"&gt;C++&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="skill-item"&gt;TypeScript&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="skill-item"&gt;VBA&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="card-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-language"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2&gt;Languages&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="language-bar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="language-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span&gt;German&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span&gt;C2&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="progress-bar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="progress" style="width: 100%"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="language-bar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="language-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span&gt;French&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span&gt;C2&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="progress-bar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="progress" style="width: 100%"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="language-bar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="language-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span&gt;English&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span&gt;C2&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="progress-bar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="progress" style="width: 100%"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="language-bar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="language-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span&gt;Spanish&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span&gt;B1&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="progress-bar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="progress" style="width: 60%"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card" style="margin-top: 2rem;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;i class="fas fa-trophy"&gt;&lt;/i&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;Projects &amp; Activities&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="projects"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="project-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Management Club Award&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;1st prize with Porsche Holding Team for sustainable car-sharing model concept&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="project-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Sports &amp; Activities&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;Kitesurfing • PADI Advanced Diver • Football • Tennis&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <div class="container">
+        <header class="header">
+            <h1>David Josef Alesch</h1>
+            <p>Financial Technology & Mechanical Engineering Professional</p>
+            <div class="contact-links">
+                <a href="tel:+352661325372">
+                    <i class="fas fa-phone"></i>
+                    +352 661 325372
+                </a>
+                <a href="mailto:david.alesch@me.com">
+                    <i class="fas fa-envelope"></i>
+                    david.alesch@me.com
+                </a>
+                <a href="https://www.linkedin.com/in/david-alesch" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                    LinkedIn
+                </a>
+            </div>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-briefcase"></i>
+                    <h2>Experience</h2>
+                </div>
+                <div class="experience-item">
+                    <h3>Mercedes-Benz AG</h3>
+                    <div class="date">11/2023 – 05/2024</div>
+                    <p>Strategic Project Management Intern</p>
+                    <ul>
+                        <li>Strategic decision-making committee preparation</li>
+                        <li>Cross-departmental coordination</li>
+                        <li>Project tracking optimization</li>
+                    </ul>
+                </div>
+                <div class="experience-item">
+                    <h3>Innoscripta AG</h3>
+                    <div class="date">11/2022 – 06/2023</div>
+                    <p>Technical Project Manager</p>
+                    <ul>
+                        <li>SME consulting for R&D funding</li>
+                        <li>Technical proposal development</li>
+                        <li>Cross-department coordination</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h2>Education</h2>
+                </div>
+                <div class="education-item">
+                    <h3>University College London</h3>
+                    <div class="date">2024 – 2025</div>
+                    <p>MSc in Financial Technology</p>
+                    <p>Expected grade: 71% (Distinction)</p>
+                </div>
+                <div class="education-item">
+                    <h3>ETH Zurich</h3>
+                    <div class="date">2019 – 2022</div>
+                    <p>BSc in Mechanical Engineering</p>
+                    <p>Grade: 5.17/6 (GPA: 3.3)</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-code"></i>
+                    <h2>Technical Skills</h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-item">Rust</div>
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">Solidity</div>
+                    <div class="skill-item">DAML</div>
+                    <div class="skill-item">MATLAB</div>
+                    <div class="skill-item">C++</div>
+                    <div class="skill-item">TypeScript</div>
+                    <div class="skill-item">VBA</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-language"></i>
+                    <h2>Languages</h2>
+                </div>
+                <div class="language-bar">
+                    <div class="language-header">
+                        <span>German</span>
+                        <span>C2</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="language-bar">
+                    <div class="language-header">
+                        <span>French</span>
+                        <span>C2</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="language-bar">
+                    <div class="language-header">
+                        <span>English</span>
+                        <span>C2</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="language-bar">
+                    <div class="language-header">
+                        <span>Spanish</span>
+                        <span>B1</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 60%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 2rem;">
+            <div class="card-header">
+                <i class="fas fa-trophy"></i>
+                <h2>Projects & Activities</h2>
+            </div>
+            <div class="projects">
+                <div class="project-card">
+                    <h3>Management Club Award</h3>
+                    <p>1st prize with Porsche Holding Team for sustainable car-sharing model concept</p>
+                </div>
+                <div class="project-card">
+                    <h3>Sports & Activities</h3>
+                    <p>Kitesurfing • PADI Advanced Diver • Football • Tennis</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
